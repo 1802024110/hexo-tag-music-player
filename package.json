@@ -1,0 +1,26 @@
+{
+  "name": "hexo-tag-music-player",
+  "version": "1.0.0",
+  "description": "hexo简约的tag音乐播放器",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel index.js --out-file ./lib/index.js"
+  },
+  "author": "noDream <1802024110@qq.com>",
+  "license": "Apache Licence 2.0",
+  "dependencies": {
+    "ejs": "^3.1.6"
+  },
+  "keywords": [
+    "hexo",
+    "hexo-tag",
+    "music",
+    "player",
+    "netease"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  }
+}
