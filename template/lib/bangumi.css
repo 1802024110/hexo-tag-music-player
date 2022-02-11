@@ -1,0 +1,182 @@
+/* 删除所有边距 */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 封面动画 */
+.cover {
+  animation: rotate360 20s linear infinite;
+}
+
+/* 360旋转动画 */
+@-webkit-keyframes rotate360 {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+/* 隐藏歌词那里的滚动条 */
+.lrcs::-webkit-scrollbar {
+  display: none;
+}
+
+/* 每一条歌词样式 */
+.lrcs p {
+  font-size: 0.5rem;
+  color: rgb(216, 221, 225);
+  margin: 0;
+  padding: 0;
+  line-height: 1.5rem;
+}
+
+/* 页面按钮的公用样式 */
+.button {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 0;
+  background-color: rgba(216, 221, 225, 0);
+}
+
+/* 按钮按下的样式 */
+.button:active {
+  box-shadow: inset 0 0 0.1rem rgba(182, 182, 182, 0.89);
+}
+
+/*进度条样式*/
+.range {
+  -webkit-appearance: none;
+  /*清除系统默认样式*/
+  width: 100%;
+  border-radius: 10px;
+  background: -webkit-linear-gradient(rgb(144, 216, 216), rgb(144, 216, 216)) no-repeat, #ddd;
+  /*设置左边颜色为#61bd12，右边颜色为#ddd*/
+  background-size: 0% 100%;
+  /*设置左右宽度比例*/
+  height: 3px;
+  /*横条的高度*/
+}
+
+/*拖动块的样式*/
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  /*清除系统默认样式*/
+  height: 20px;
+  /*拖动块高度*/
+  width: 20px;
+  /*拖动块宽度*/
+  background: #fff;
+  /*拖动块背景*/
+  border-radius: 50%;
+  /*外观设置为圆形*/
+  border: solid 1px #ddd;
+  /*设置边框*/
+  transition: 0.30s;
+}
+
+/* 进度条滑块滑动时样式 */
+.range::-webkit-slider-thumb:active {
+  width: 26px;
+  height: 26px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 播放列表蒙版box的样式 */
+.listOverlay {
+  position: absolute;
+  left: 0%;
+  bottom: -100%;
+  transition: 0.3s;
+  display: none;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  border-radius: 10px;
+  overflow: scroll;
+  background-color: rgb(255, 255, 255);
+}
+/* 隐藏播放列表的滚动条 */
+.listOverlay::-webkit-scrollbar {
+  display: none;
+}
+/* 播放列表的top图片 */
+#top_img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  position: absolute;
+  top: 0px;
+  opacity: 0.5;
+  filter: blur(5px);
+}
+/* 播放列表的top图片悬浮 */
+#top_img:hover {
+  opacity: 1;
+
+  filter: blur(0px);
+}
+.icon-bofang {
+  font-size: 2rem;
+  color: rgb(144, 216, 216);
+}
+
+.icon-xiayishou,
+.icon-shangyishou {
+  font-size: 1rem;
+  color: #caccdb;
+}
+
+.icon-shunxu {
+  font-size: 2.4rem;
+  position: relative;
+  bottom: -0.1rem;
+  vertical-align: bottom;
+}
+
+.icon-Translate {
+  margin-right: 1rem;
+}
+
+.icon-guanbi {
+  font-size: 2rem;
+  color: #000000;
+}
+
+.list_icon {
+  font-size: 1.5rem;
+  color: #000000;
+}
+
+#music_list>div {
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr 1fr;
+  align-items: center;
+}
+
+#music_list>div:active {
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1);
+}
+
+#music_list div img {
+  object-fit: fill;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  margin-left: 0.5rem;
+}
+
+#music_list div div {
+  display: grid;
+  margin-left: 10px;
+}
+
+#music_list div div span:nth-child(2) {
+  font-size: 00.1rem;
+  color: rgba(153, 136, 136, 0.877);
+}
