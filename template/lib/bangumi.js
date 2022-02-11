@@ -1,13 +1,19 @@
 class MusicPlayer {
-  constructor(playInfo, playIndex, cover, songName, lrcs, range, nowPlay, totalPlay, play, prev, next, translation, mv, sort, list, listOverlay, close, music_list, music_count, video) {
+  constructor(playInfo, divPlayInfo = [], playIndex, cover, songName, lrcs, range, nowPlay, totalPlay, play, prev, next, translation, mv, sort, list, listOverlay, close, music_list, music_count, video) {
     /* 
-    playInfo:歌曲信息，格式为
-    {
-      cover: 歌曲封面
-      lyric: 歌曲歌词
-      name: 歌曲名
-      tlyric: 歌曲歌词翻译(若无则参数为空)
-      url: 歌曲链接
+    playInfo:歌曲信息
+    divPlayInfo: 自定义的歌曲列表，格式如下
+        {
+      author: 作者  例: '张三'
+      link: 原音乐网站 例: 'https://music.163.com/#/song?id=123456789'
+      lrc: 歌词 例: "[00:00.000] 作词 : ilem ..."
+      mv: mv地址 例: 'https://xxx.com/xxx.mp4'
+      pic: 封面 例: 'https://xxx.com/xxx.jpg'
+      songid: 音乐id 例: '123456789'
+      title: "音乐标题" 例: '群青'
+      tlrc: 音乐歌词翻译 例: "[00:00.000] 作词 : ilem ..."
+      type: "音乐平台，只有网易或者哔哩哔哩" 例: 'netease/bilibili'
+      url: "mp3地址" 例: 'https://xxx.com/xxx.mp3'
     }
     playIndex: 歌曲索引
     cover: 封面img的document对象
@@ -30,7 +36,9 @@ class MusicPlayer {
     video: 视频的document对象
     */
     this.playInfo = playInfo;
-    this.playList = this.playInfo;
+    this.divPlayInfo = divPlayInfo;
+    // 将获取的歌曲信息和自定义的拼接起来
+    this.playList = this.playInfo.concat(this.divPlayInfo);
     this.playIndex = playIndex;
     this.audio = document.getElementById('audio1');
     this.cover = cover;
