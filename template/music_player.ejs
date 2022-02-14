@@ -75,7 +75,7 @@
 </div>
 <audio id="audio1"></audio>
 <script>
-  var data = <%-JSON.stringify(play_list)%>
+  const data = <%-JSON.stringify(play_list)%>
   <%- await include('./lib/music_player.js') %>
 </script>
 <style>

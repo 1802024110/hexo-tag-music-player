@@ -76,6 +76,7 @@ async function getNeteaseMusicList(id, limit = 10, offset = 1) {
     }
   })
   idsData = '[' + ids.map((id) => '{id:' + id + '}').join(',') + ']'
+  console.log(`[tag-music-play]正在获取${idsData.length}首歌曲信息`);
   const songs = await axios.post(`https://music.163.com/api/v3/song/detail?c=${idsData}`).then(res => {
     if (res.data.code === 200) {
       console.log('[tag-music-play]获取歌曲信息成功');

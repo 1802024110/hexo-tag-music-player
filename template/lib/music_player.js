@@ -316,10 +316,14 @@ class MusicPlayer {
         elDivImg.src = this.playList[i].pic;
         const elDivDiv = document.createElement('div');
         elDivDiv.onclick = () => {
+          // 确定播放的是哪一首
+          this.playIndex = i;
           // 切换为当前选择的歌曲
           this.audio.src = this.playList[i].url;
           this.cover.src = this.playList[i].pic;
           this.initLrc(this.playList[i].lrc);
+          console.log("播放列表点击");
+          this.songName.innerHTML = this.playList[i].title
           this.audio.play();
         }
         const elDivDivP1 = document.createElement('span');

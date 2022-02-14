@@ -8,7 +8,7 @@ module.exports = async function (list, source_dir) {
   // 获得歌单id
   const id = list[1]
   // 获得歌单歌曲信息
-  const netease_play_list = await netease.getNeteaseMusicList(id, 2, 165465)
+  const netease_play_list = await netease.getNeteaseMusicList(id, 10, 1)
   // 检查_data/play_list.json文件是否存在
   let div_list = []
   if (fs.existsSync(path.join(source_dir, '_data/play_list.json'))) {
