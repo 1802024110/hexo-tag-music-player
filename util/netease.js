@@ -88,28 +88,18 @@ async function getNeteaseMusicList(id, limit = 10, offset = 1) {
   let play_list = []
   for (let i = 0; i < songs.length; i++) {
     const song = songs[i]
-    const song_id = song.id
-    const song_name = song.name
-    const song_artist = song.ar.map(item => item.name).join('/')
-    const song_album = song.al.name
-    const song_album_pic = song.al.picUrl
-    const song_duration = song.dt / 1000
-    const song_url = await getNeteaseMusicUrl(song_id)
-    const song_lrc = await getNeteaseMusicLrc(song_id, 'lrc')
-    const song_tlrc = await getNeteaseMusicLrc(song_id, 'tlrc')
-    const song_mv = await getNeteaseMvUrl(song.mv)
     play_list.push({
-      songid: song_id,
-      title: song_name,
-      author: song_artist,
-      album: song_album,
-      pic: song_album_pic,
-      duration: song_duration,
-      url: song_url,
-      lrc: song_lrc,
-      tlrc: song_tlrc,
-      mv: song_mv,
-      link: `https://music.163.com/#/song?id=${song_id}`,
+      songid: song.id,
+      title: song.name,
+      author: song.ar.map(item => item.name).join('/'),
+      album: song.al.name,
+      pic: song.al.picUrl,
+      duration: song.dt / 1000,
+      url: await getNeteaseMusicUrl(song.id),
+      lrc: await getNeteaseMusicLrc(song.id, 'lrc'),
+      tlrc: await getNeteaseMusicLrc(song.id, 'tlrc'),
+      mv: await getNeteaseMvUrl(song.mv),
+      link: `https://music.163.com/#/song?id=${song.id}`,
       type: 'netease'
     })
   }

@@ -26,8 +26,10 @@ module.exports = async function (list, source_dir) {
       fs.writeFileSync(path.join(source_dir, '_data/play_list.json'), '[{}]');
     }
   }
-  // 读取_data/play_list.json文件
+  // 组合歌单信息
+  const play_list = [...netease_play_list, ...div_list]
   const content = await ejs.renderFile(path.join(__dirname, '../template/bangumi.ejs'), {
+    play_list: play_list
   }, { async: true })
   return content;
 }
