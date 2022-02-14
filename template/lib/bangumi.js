@@ -1,5 +1,5 @@
 class MusicPlayer {
-  constructor(playInfo, divPlayInfo = [], playIndex, cover, songName, lrcs, range, nowPlay, totalPlay, play, prev, next, translation, mv, sort, list, listOverlay, close, music_list, music_count, video) {
+  constructor(playInfo, divPlayInfo = [], playIndex = 0, cover, songName, lrcs, range, nowPlay, totalPlay, play, prev, next, translation, mv, sort, list, listOverlay, close, music_list, music_count, video) {
     /* 
     playInfo:歌曲信息
     divPlayInfo: 自定义的歌曲列表，格式如下
@@ -38,7 +38,7 @@ class MusicPlayer {
     this.playInfo = playInfo;
     this.divPlayInfo = divPlayInfo;
     // 将获取的歌曲信息和自定义的拼接起来
-    this.playList = this.playInfo.concat(this.divPlayInfo);
+    this.playList = this.playInfo
     this.playIndex = playIndex;
     this.audio = document.getElementById('audio1');
     this.cover = cover;
@@ -61,7 +61,7 @@ class MusicPlayer {
     this.video = video;
     fetch(this.playList).then(res => res.json()).then(data => {
       // 只接受一首歌曲，切换歌就切换this.playList
-      this.playList = data;
+      this.playList = [...data, ...this.divPlayInfo];
       this.init(this.playList[playIndex]);
     });
   }
