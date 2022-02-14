@@ -1,8 +1,8 @@
 class MusicPlayer {
-  constructor(playInfo, divPlayInfo = [], playIndex = 0, cover, songName, lrcs, range, nowPlay, totalPlay, play, prev, next, translation, mv, sort, list, listOverlay, close, music_list, music_count, video, list2) {
+  constructor(playList, playIndex = 0, cover, songName, lrcs, range, nowPlay, totalPlay, play, prev, next, translation, mv, sort, list, listOverlay, close, music_list, music_count, video, list2) {
+    //#region 
     /* 
-    playInfo:歌曲信息
-    divPlayInfo: 自定义的歌曲列表，格式如下
+    playInfo:歌曲信息格式如下
         {
       author: 作者  例: '张三'
       link: 原音乐网站 例: 'https://music.163.com/#/song?id=123456789'
@@ -35,10 +35,8 @@ class MusicPlayer {
     music_count: 歌曲列表的数量
     video: 视频的document对象
     */
-    this.playInfo = playInfo;
-    this.divPlayInfo = divPlayInfo;
-    // 将获取的歌曲信息和自定义的拼接起来
-    this.playList = this.playInfo
+    //#endregion
+    this.playList = playList;
     this.playIndex = playIndex;
     this.audio = document.getElementById('audio1');
     this.cover = cover;
@@ -59,11 +57,7 @@ class MusicPlayer {
     this.music_list = music_list;
     this.music_count = music_count;
     this.video = video;
-    fetch(this.playList).then(res => res.json()).then(data => {
-      // 只接受一首歌曲，切换歌就切换this.playList
-      this.playList = [...data, ...this.divPlayInfo];
-      this.init(this.playList[playIndex]);
-    });
+    this.init(playList[0]);
   }
 
   init(playInfo) {
@@ -267,9 +261,11 @@ class MusicPlayer {
         this.translation.style.display = 'none';
       }
       if (this.playList[this.playIndex].mv) {
-        this.mv.style.display = 'block';
+        this.mv.style.opacity = 1;
+        this.mv.disabled = true
       } else {
-        this.mv.style.display = 'none';
+        this.mv.style.opacity = 0;
+        this.mv.disabled = false
       }
     })
     // mv
@@ -382,3 +378,25 @@ class MusicPlayer {
     this.audio.pause();
   }
 }
+const ms = new MusicPlayer(
+  data,
+  0,
+  document.getElementById('cover'),
+  document.getElementById('songName'),
+  document.getElementById('lrc'),
+  document.getElementById('range'),
+  document.getElementById('nowPlay'),
+  document.getElementById('totalPlay'),
+  document.getElementById('play'),
+  document.getElementById('prev'),
+  document.getElementById('next'),
+  document.getElementById('translation'),
+  document.getElementById('mv'),
+  document.getElementById('sort'),
+  document.getElementById('list'),
+  document.getElementById('listOverlay'),
+  document.getElementById('close'),
+  document.getElementById('music_list'),
+  document.getElementById('music_count'),
+  document.getElementById('video')
+); 

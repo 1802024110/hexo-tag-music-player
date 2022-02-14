@@ -27,7 +27,7 @@ module.exports = async function (list, source_dir) {
     }
   }
   // 组合歌单信息
-  const play_list = [...netease_play_list, ...div_list]
+  const play_list = [...div_list, ...netease_play_list]
   const content = await ejs.renderFile(path.join(__dirname, '../template/music_player.ejs'), {
     play_list: play_list
   }, { async: true })
