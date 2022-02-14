@@ -1,5 +1,5 @@
 class MusicPlayer {
-  constructor(playInfo, divPlayInfo = [], playIndex = 0, cover, songName, lrcs, range, nowPlay, totalPlay, play, prev, next, translation, mv, sort, list, listOverlay, close, music_list, music_count, video) {
+  constructor(playInfo, divPlayInfo = [], playIndex = 0, cover, songName, lrcs, range, nowPlay, totalPlay, play, prev, next, translation, mv, sort, list, listOverlay, close, music_list, music_count, video, list2) {
     /* 
     playInfo:歌曲信息
     divPlayInfo: 自定义的歌曲列表，格式如下
