@@ -254,7 +254,6 @@ class MusicPlayer {
       if (count === 0) {
         this.initLrc(this.playList[this.playIndex].tlrc);
         count = 1;
-        console.log(count);
       }
       else {
         this.initLrc(this.playList[this.playIndex].lrc);

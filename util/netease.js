@@ -72,7 +72,6 @@ async function getNeteaseMusicList(id, limit = 10, offset = 1) {
   // 偏移量处理后的歌曲id
   list_id.forEach((item, index) => {
     if (index >= limit * offset && index < limit * (offset + 1)) {
-      console.log(index);
       ids.push(item)
     }
   })

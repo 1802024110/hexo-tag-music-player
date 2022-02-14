@@ -27,7 +27,6 @@ module.exports = async function (list, source_dir) {
     }
   }
   // 读取_data/play_list.json文件
-  console.log(div_list);
   const content = await ejs.renderFile(path.join(__dirname, '../template/bangumi.ejs'), {
   }, { async: true })
   return content;
