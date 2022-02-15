@@ -25,5 +25,8 @@
   "repository": {
     "type": "git",
     "url": ""
+  },
+  "devDependencies": {
+    "http-proxy-middleware": "^2.0.3"
   }
 }
