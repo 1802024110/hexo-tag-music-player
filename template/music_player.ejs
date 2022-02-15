@@ -1,4 +1,10 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_3167935_mshz09q56.css">
+<script>
+  const port= <%-port%>
+</script>
+<script>
+<%- await include('./lib/netease.js') %>
+</script>
 <div style="width: 100%;height: 100%;border-radius: 20px;overflow: hidden;position: relative;">
   <!-- 显示歌曲列表的模板开始 -->
   <div id="listOverlay" class="listOverlay">
@@ -75,7 +81,7 @@
 </div>
 <audio id="audio1"></audio>
 <script>
-  const data = <%-JSON.stringify(play_list)%>
+  const div_list= <%-JSON.stringify(div_list)%>
   <%- await include('./lib/music_player.js') %>
 </script>
 <style>

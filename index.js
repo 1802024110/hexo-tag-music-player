@@ -17,6 +17,8 @@ hexo.extend.filter.register('server_middleware', function (app) {
   app.use('/api', apiProxy);
 });
 
+// 获得部署的端口号
+const port = process.env.PORT || hexo.config.server.port || 4000;
 /* 
   hexo-tag
 */
@@ -24,7 +26,7 @@ const listMode = require('./util/list-mode');
 hexo.extend.tag.register('musicPlay', function (args) {
   const source_dir = hexo.source_dir;
   switch (args[0]) {
-    case 'list': return listMode(args, source_dir); break;
+    case 'list': return listMode(args, source_dir, port); break;
     case 'singe': console.log('singe'); break;
     default: return '模式(mode)参数错误';
   }

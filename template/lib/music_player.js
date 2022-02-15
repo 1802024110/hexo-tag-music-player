@@ -383,7 +383,7 @@ class MusicPlayer {
   }
 }
 const ms = new MusicPlayer(
-  data,
+  div_list,
   0,
   document.getElementById('cover'),
   document.getElementById('songName'),

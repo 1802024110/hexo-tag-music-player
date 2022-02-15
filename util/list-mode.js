@@ -4,11 +4,10 @@ const ejs = require('ejs');
 const netease = require('./netease')
 // 返回网易云歌单里面的所有歌曲信息
 
-module.exports = async function (list, source_dir) {
+module.exports = async function (list, source_dir, port) {
   // 获得歌单id
   const id = list[1]
   // 获得歌单歌曲信息
-  const netease_play_list = await netease.getNeteaseMusicList(id, 10, 1)
   // 检查_data/play_list.json文件是否存在
   let div_list = []
   if (fs.existsSync(path.join(source_dir, '_data/play_list.json'))) {
@@ -27,9 +26,9 @@ module.exports = async function (list, source_dir) {
     }
   }
   // 组合歌单信息
-  const play_list = [...div_list, ...netease_play_list]
   const content = await ejs.renderFile(path.join(__dirname, '../template/music_player.ejs'), {
-    play_list: play_list
+    div_list: div_list,
+    port: port
   }, { async: true })
   return content;
 }
