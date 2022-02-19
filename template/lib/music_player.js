@@ -1,5 +1,6 @@
+// let data = new Netease().get_format_playlist(list_id)
 class MusicPlayer {
-  constructor(playList, playIndex = 0, cover, songName, lrcs, range, nowPlay, totalPlay, play, prev, next, translation, mv, sort, list, listOverlay, close, music_list, music_count, video, list2) {
+  constructor(div_list, playIndex = 0, cover, songName, lrcs, range, nowPlay, totalPlay, play, prev, next, translation, mv, sort, list, listOverlay, close, music_list, music_count, video, list2) {
     //#region 
     /* 
     playInfo:歌曲信息格式如下
@@ -36,32 +37,47 @@ class MusicPlayer {
     video: 视频的document对象
     */
     //#endregion
-    this.playList = playList;
-    this.playIndex = playIndex;
-    this.audio = document.getElementById('audio1');
-    this.cover = cover;
-    this.songName = songName;
-    this.lrcs = lrcs;
-    this.range = range;
-    this.nowPlay = nowPlay;
-    this.totalPlay = totalPlay;
-    this.play = play;
-    this.prev = prev;
-    this.next = next;
-    this.translation = translation;
-    this.mv = mv;
-    this.sort = sort;
-    this.list = list;
-    this.listOverlay = listOverlay;
-    this.close = close;
-    this.music_list = music_list;
-    this.music_count = music_count;
-    this.video = video;
-    this.init(playList[0]);
+    this.netease = new Netease();
+    this.offset = 0;
+    this.netease.get_format_playlist(list_id, 3, this.offset).then(data => {
+      this.div_list = div_list;
+      this.playList = [...this.div_list, ...data];
+      this.playIndex = playIndex;
+      this.audio = document.getElementById('audio1');
+      this.cover = cover;
+      this.songName = songName;
+      this.lrcs = lrcs;
+      this.range = range;
+      this.nowPlay = nowPlay;
+      this.totalPlay = totalPlay;
+      this.play = play;
+      this.prev = prev;
+      this.next = next;
+      this.translation = translation;
+      this.mv = mv;
+      this.sort = sort;
+      this.list = list;
+      this.listOverlay = listOverlay;
+      this.close = close;
+      this.music_list = music_list;
+      this.music_count = music_count;
+      this.video = video;
+      this.init(this.playList[0]);
+    });
   }
-
+  // 添加歌曲到播放列表
+  add() {
+    this.offset += 1
+    this.netease.get_format_playlist(list_id, 3, this.offset).then(data => {
+      // 如果this.playList中没有data中的歌曲，则添加
+      for (let i = 0; i < data.length; i++) {
+        if (!this.playList.includes(data[i])) {
+          this.playList.push(data[i]);
+        }
+      }
+    });
+  }
   init(playInfo) {
-
     // 初始化歌曲播放链接
     this.audio.src = 'https://music.163.com/song/media/outer/url?id=' + playInfo.songid + '.mp3';
     // 初始化封面
@@ -100,7 +116,9 @@ class MusicPlayer {
     // 调用音乐控制器
     this.control()
   }
-
+  // 播放列表
+  list() {
+  }
   // 初始化歌词
   initLrc(lrc) {
     // 删除容器中的所有元素
@@ -260,7 +278,7 @@ class MusicPlayer {
       } else {
         this.translation.style.display = 'none';
       }
-      if (this.playList[this.playIndex].mv) {
+      if (this.playList[this.playIndex].mv && this.playList[this.playIndex].mv != 500) {
         this.mv.style.opacity = 1;
         this.mv.disabled = true
       } else {
@@ -331,8 +349,8 @@ class MusicPlayer {
         const elDivDivP2 = document.createElement('span');
         elDivDivP2.innerHTML = this.playList[i].author;
         const elDivButton1 = document.createElement('button');
-        elDivButton1.className = this.playList[i].mv ? 'iconfont icon-mv button' : 'button';
-        if (!this.playList[i].mv) elDivButton1.disabled = true
+        elDivButton1.className = this.playList[i].mv && this.playList[i] != 500 ? 'iconfont icon-mv button' : 'button';
+        if (!this.playList[i].mv || this.playList[i] == 500) elDivButton1.disabled = true
         elDivButton1.onclick = () => {
           if (this.playList[i].mv) {
             this.video.style.display = 'block';
@@ -375,6 +393,11 @@ class MusicPlayer {
       }, 500)
     }
   }
+  // 获得播放列表
+  // async getPlayList(list_id) {
+  //   const netease = new Netease();
+  //   return await netease.get_format_playlist(list_id)
+  // }
   playAction() {
     this.audio.play();
   }
@@ -403,4 +426,4 @@ const ms = new MusicPlayer(
   document.getElementById('music_list'),
   document.getElementById('music_count'),
   document.getElementById('video')
-); 
+);

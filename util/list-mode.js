@@ -4,7 +4,7 @@ const ejs = require('ejs');
 const netease = require('./netease')
 // 返回网易云歌单里面的所有歌曲信息
 
-module.exports = async function (list, source_dir, port) {
+module.exports = async function (list, source_dir) {
   // 获得歌单id
   const id = list[1]
   // 获得歌单歌曲信息
@@ -27,8 +27,8 @@ module.exports = async function (list, source_dir, port) {
   }
   // 组合歌单信息
   const content = await ejs.renderFile(path.join(__dirname, '../template/music_player.ejs'), {
+    list_id: id,
     div_list: div_list,
-    port: port
   }, { async: true })
   return content;
 }
